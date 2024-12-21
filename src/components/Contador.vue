@@ -1,5 +1,5 @@
 <template>
-    <h2>{{encabezado}} :{{ valor2 }}</h2>
+    <h2 v-if="!encabezado.includes('a')">{{encabezado}} :{{ valor2 }}</h2>
     <p>{{numero}} <sup>{{exponente}}</sup>={{ calcularCuadradoComputado}}</p>
     <p>{{numero}} <sup>{{exponente}}</sup>={{ calcularCuadradoComputado}}</p>
     
@@ -47,7 +47,13 @@ export default {
         // props: ['encabezado', 'valor']
         //segunda forma de hacerlo props
     props: {
-        encabezado: String,
+        encabezado: {
+            type: String,
+            required: true,
+            validator(value){
+                return !value.includes('a');
+            }
+        },
         valor: Number,
         valor2:{
             type:Number,
